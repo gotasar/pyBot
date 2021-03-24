@@ -65,7 +65,7 @@ class BotDataBase:
                                 "user INTEGER, " +
                                 "word INTEGER, " +
                                 "grade INTEGER, " +
-                                "last_date DATE)")
+                                "last_date timestamp)")
         BotDataBase.conn.commit()
 
     @staticmethod
