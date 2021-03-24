@@ -1,4 +1,4 @@
-# web: gunicorn app:app
+# web: gunicorn main:app
 # worker: python main.py 5000
 # heroku addons:create heroku-postgresql:hobby-dev
 # Created postgresql-metric-65240 as DATABASE_URL
@@ -62,7 +62,7 @@ class BotDataBase:
     @staticmethod
     def tb_progress():
         BotDataBase.cur.execute("CREATE TABLE progress (id SERIAL PRIMARY KEY, " +
-                                "user INTEGER, " +
+                                "[user] INTEGER, " +
                                 "word INTEGER, " +
                                 "grade INTEGER, " +
                                 "last_date timestamp)")
