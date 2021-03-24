@@ -4,6 +4,7 @@
 # Created postgresql-metric-65240 as DATABASE_URL
 # pip install psycopg2-binary
 # heroku ps:scale web=1
+# heroku logs --tail
 
 # import os
 import psycopg2
@@ -55,7 +56,7 @@ class BotDataBase:
     @staticmethod
     def tb_states():
         BotDataBase.cur.execute("CREATE TABLE states (id SERIAL PRIMARY KEY, " +
-                                "state INTEGER")
+                                "state INTEGER)")
         BotDataBase.conn.commit()
 
     @staticmethod
