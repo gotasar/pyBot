@@ -63,8 +63,8 @@ class BotDataBase:
     def tb_progress():
         BotDataBase.cur.execute("CREATE TABLE progress (id SERIAL PRIMARY KEY, " +
                                 "user INTEGER, " +
-                                "word INTEGER," +
-                                "grade INTEGER,"
+                                "word INTEGER, " +
+                                "grade INTEGER, "
                                 "last_date DATE)")
         BotDataBase.conn.commit()
 
