@@ -1,4 +1,4 @@
-# https://api.telegram.org/bot1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g/setWebhook?url=https://4814d3db165139.localhost.run/
+# https://api.telegram.org/bot1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g/setWebhook?url=https://thawing-badlands-72124.herokuapp.com/
 # ssh -R 80:localhost:5000 localhost.run
 
 from flask import Flask, request, jsonify
