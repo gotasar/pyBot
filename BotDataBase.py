@@ -86,7 +86,7 @@ class BotDataBase:
     def add_theme(theme):
         BotDataBase.cur.execute("INSERT INTO themes (theme) " +
                                 "VALUES (%s)",
-                                theme)
+                                (theme, 0))
         BotDataBase.conn.commit()
 
     @staticmethod
@@ -111,7 +111,7 @@ class BotDataBase:
             for p in js["progress"]:
                 print(p["Theme"])
                 print(type(p["Theme"]))
-                theme = p["Theme"]
+                theme = str(p["Theme"])
                 BotDataBase.add_theme(theme)
                 BotDataBase.cur.execute(f"SELECT id FROM themes WHERE theme = {theme}")
                 row = BotDataBase.cur.fetchone()
