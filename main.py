@@ -61,8 +61,8 @@ def index():
                 BotTranslate.switch_theme(r, words[1])
             pass
         elif '/start' == message:
-            BotDataBase.connect()
-            BotDataBase.tb_users()
+            # BotDataBase.connect()
+            # BotDataBase.tb_users()
             BotTranslate.start(r)
         else:
             words = message.split()
