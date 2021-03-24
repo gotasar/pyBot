@@ -40,7 +40,7 @@ class BotDataBase:
 
     @staticmethod
     def tb_themes():
-        BotDataBase.cur.execute("CREATE TABLE users (id SERIAL PRIMARY KEY, " +
+        BotDataBase.cur.execute("CREATE TABLE themes (id SERIAL PRIMARY KEY, " +
                                 "theme VARCHAR(64))")
         BotDataBase.conn.commit()
 
@@ -117,7 +117,7 @@ class BotDataBase:
 
     @staticmethod
     def init():
-        #BotDataBase.tb_users()
+        BotDataBase.tb_users()
         BotDataBase.tb_words()
         BotDataBase.tb_states()
         BotDataBase.tb_themes()
