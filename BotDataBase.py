@@ -4,10 +4,15 @@
 # Created postgresql-metric-65240 as DATABASE_URL
 # pip install psycopg2-binary
 
+import os
+import psycopg2
+
+
 class BotDataBase:
     @staticmethod
-    def access_connect():
-
+    def connect():
+        DATABASE_URL = os.environ['postgresql-metric-65240']
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         pass
     pass
 
