@@ -62,7 +62,7 @@ class BotDataBase:
     @staticmethod
     def tb_progress():
         BotDataBase.cur.execute("CREATE TABLE progress (id SERIAL PRIMARY KEY, " +
-                                "last_date INTEGER)")
+                                "last_date timestamp)")
         BotDataBase.conn.commit()
 
     @staticmethod
@@ -106,6 +106,8 @@ class BotDataBase:
             js = json.load(f)
             themes = []
             for p in js["progress"]:
+                print(p["Theme"])
+                print(type(p["Theme"]))
                 BotDataBase.add_theme(p["Theme"])
                 BotDataBase.cur.execute(f"SELECT id FROM themes WHERE theme = {p['Theme']}")
                 row = BotDataBase.cur.fetchone()
