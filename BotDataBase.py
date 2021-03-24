@@ -61,9 +61,13 @@ class BotDataBase:
 
     @staticmethod
     def tb_progress():
-        BotDataBase.cur.execute("CREATE TABLE user_progress "
-                                "(id SERIAL PRIMARY KEY, "
-                                "[grade] INTEGER)")
+        BotDataBase.cur.execute("CREATE TABLE progress (id SERIAL PRIMARY KEY, " +
+                                "first_name VARCHAR(64), " +
+                                "state INTEGER," +
+                                "theme INTEGER," +
+                                "complexity INTEGER," +
+                                "grade INTEGER," +
+                                "num_questions INTEGER)")
         BotDataBase.conn.commit()
 
     @staticmethod
