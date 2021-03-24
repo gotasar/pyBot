@@ -59,7 +59,7 @@ class Lesson:
             index += 1
             if word["grade"] < self.js["grade"]:
                 q = f"Переведите: {word['EN']}"
-                o.append(f"{word['EN']} {word['RU']}")
+                o.append(f"{word['EN']}: {word['RU']}")
                 i = 1
                 while i < self.js["complexity"]:
                     o.append(f"{word['EN']} {words[(index + i + 2) % len(words)]['RU']}")
