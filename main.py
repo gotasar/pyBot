@@ -65,8 +65,8 @@ def index():
             # BotDataBase.tb_users()
             BotTranslate.start(r)
         elif 'Создай стартовую бд' == message:
-            BotDataBase.connect()
-            BotDataBase.init()
+            # BotDataBase.connect()
+            # BotDataBase.init()
         else:
             words = message.split()
             if len(words) == 2:
