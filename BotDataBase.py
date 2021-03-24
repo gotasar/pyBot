@@ -9,10 +9,24 @@ import psycopg2
 
 
 class BotDataBase:
+    conn = -1
+    cur = -1
+
     @staticmethod
     def connect():
         DATABASE_URL = os.environ['postgresql-metric-65240']
-        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        BotDataBase.conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        BotDataBase.cur = BotDataBase.conn.cursor()
         pass
-    pass
+
+    @staticmethod
+    def tb_users():
+        BotDataBase.cur.execute("CREATE TABLE users (id SERIAL PRIMARY KEY, " +
+                                "login VARCHAR(64), state INTEGER," +
+                                "theme INTEGER," +
+                                "complexity INTEGER," +
+                                "grade INTEGER," +
+                                "num_questions INTEGER)")
+        BotDataBase.conn.commit()
+
 

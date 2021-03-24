@@ -9,6 +9,7 @@ from telebot import types
 from keyboard import User, Lesson
 import shutil
 from translate_bot import BotTranslate, BotKeyboard
+from BotDataBase import BotDataBase
 
 TOKEN = '1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g'
 bot = telebot.TeleBot(TOKEN)
@@ -60,6 +61,8 @@ def index():
                 BotTranslate.switch_theme(r, words[1])
             pass
         elif '/start' == message:
+            BotDataBase.connect()
+            BotDataBase.tb_users()
             BotTranslate.start(r)
         else:
             words = message.split()
