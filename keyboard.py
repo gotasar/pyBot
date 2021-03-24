@@ -62,7 +62,7 @@ class Lesson:
                 o.append(f"{word['EN']}: {word['RU']}")
                 i = 1
                 while i < self.js["complexity"]:
-                    o.append(f"{word['EN']} {words[(index + i + 2) % len(words)]['RU']}")
+                    o.append(f"{word['EN']}: {words[(index + i + 2) % len(words)]['RU']}")
                     i += 1
                 random.shuffle(o)
                 res = {"Question": q, "Answer options": o}
