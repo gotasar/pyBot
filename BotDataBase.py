@@ -78,7 +78,7 @@ class BotDataBase:
         BotDataBase.cur.execute("SELECT id FROM words")
         for row in BotDataBase.cur:
             user = id
-            word = row["id"]
+            word = row[0]
             BotDataBase.add_progress(user, word)
 
     @staticmethod
