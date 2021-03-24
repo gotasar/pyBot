@@ -62,12 +62,10 @@ class BotDataBase:
     @staticmethod
     def tb_progress():
         BotDataBase.cur.execute("CREATE TABLE progress (id SERIAL PRIMARY KEY, " +
-                                "first_name VARCHAR(64), " +
-                                "state INTEGER," +
-                                "theme INTEGER," +
-                                "complexity INTEGER," +
+                                "user INTEGER, " +
+                                "word INTEGER," +
                                 "grade INTEGER," +
-                                "num_questions INTEGER)")
+                                "last_date INTEGER)")
         BotDataBase.conn.commit()
 
     @staticmethod
@@ -125,5 +123,5 @@ class BotDataBase:
         BotDataBase.tb_states()
         BotDataBase.tb_themes()
         BotDataBase.tb_progress()
-        BotDataBase.add_themes_and_words()
+        BotDataBase.add_themes_and_words('words.json')
 
