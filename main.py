@@ -1,4 +1,4 @@
-# https://api.telegram.org/bot1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g/setWebhook?url=https://87c42c263b4518.localhost.run/
+# https://api.telegram.org/bot1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g/setWebhook?url=https://4814d3db165139.localhost.run/
 # ssh -R 80:localhost:5000 localhost.run
 
 from flask import Flask, request, jsonify
@@ -73,6 +73,7 @@ def index():
 
 
 if __name__ == '__main__':
+    """
     import os
     import logging
     # Проверим, есть ли переменная окружения Хероку (как ее добавить смотрите ниже)
@@ -103,5 +104,6 @@ if __name__ == '__main__':
         # Удаляем вебхук на всякий случай, и запускаем с обычным поллингом.
         bot.remove_webhook()
         bot.polling(none_stop=True)
+    """
     app.run()
 

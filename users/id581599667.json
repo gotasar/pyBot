@@ -1,8 +1,8 @@
 {
     "firstName": "Nikita",
     "grade": 3,
-    "theme": "Книги",
-    "complexity": 5,
+    "theme": "Одежда",
+    "complexity": 3,
     "gradeAVG": 0,
     "data": 0,
     "progress": [
@@ -10,9 +10,19 @@
             "Theme": "Одежда",
             "Words": [
                 {
+                    "EN": "jeans",
+                    "RU": "джинсы",
+                    "grade": 4
+                },
+                {
+                    "EN": "trousers",
+                    "RU": "брюки",
+                    "grade": 0
+                },
+                {
                     "EN": "dress",
                     "RU": "платье",
-                    "grade": 4
+                    "grade": 2
                 },
                 {
                     "EN": "coat",
@@ -20,23 +30,13 @@
                     "grade": 0
                 },
                 {
-                    "EN": "trousers",
-                    "RU": "брюки",
-                    "grade": 2
+                    "EN": "shirt",
+                    "RU": "рубашка",
+                    "grade": 0
                 },
                 {
                     "EN": "jacket",
                     "RU": "куртка",
-                    "grade": 2
-                },
-                {
-                    "EN": "jeans",
-                    "RU": "джинсы",
-                    "grade": 4
-                },
-                {
-                    "EN": "shirt",
-                    "RU": "рубашка",
                     "grade": 0
                 }
             ]
@@ -45,13 +45,23 @@
             "Theme": "Книги",
             "Words": [
                 {
+                    "EN": "writer",
+                    "RU": "писатель",
+                    "grade": 0
+                },
+                {
                     "EN": "library",
                     "RU": "библиотека",
                     "grade": 0
                 },
                 {
-                    "EN": "a fairy tale",
-                    "RU": "сказка",
+                    "EN": "magazine",
+                    "RU": "журнал",
+                    "grade": 0
+                },
+                {
+                    "EN": "plot",
+                    "RU": "сюжет",
                     "grade": 0
                 },
                 {
@@ -60,18 +70,8 @@
                     "grade": 0
                 },
                 {
-                    "EN": "plot",
-                    "RU": "сюжет",
-                    "grade": 2
-                },
-                {
-                    "EN": "magazine",
-                    "RU": "журнал",
-                    "grade": 0
-                },
-                {
-                    "EN": "writer",
-                    "RU": "писатель",
+                    "EN": "a fairy tale",
+                    "RU": "сказка",
                     "grade": 0
                 }
             ]

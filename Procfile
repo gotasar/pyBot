@@ -1,1 +1,1 @@
-worker: python main.py 5000
+web: gunicorn gettingstarted.wsgi
