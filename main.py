@@ -77,5 +77,6 @@ def index():
 
 if __name__ == '__main__':
     BotDataBase.connect()
+    BotDataBase.init()
     app.run()
 

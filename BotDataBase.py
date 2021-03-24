@@ -3,6 +3,7 @@
 # heroku addons:create heroku-postgresql:hobby-dev
 # Created postgresql-metric-65240 as DATABASE_URL
 # pip install psycopg2-binary
+# heroku ps:scale web=1
 
 # import os
 import psycopg2
