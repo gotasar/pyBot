@@ -113,7 +113,7 @@ class BotDataBase:
                 print(type(p["Theme"]))
                 theme = str(p["Theme"])
                 BotDataBase.add_theme(theme)
-                BotDataBase.cur.execute(f"SELECT id FROM themes WHERE theme = {theme}")
+                BotDataBase.cur.execute(f"SELECT id FROM themes WHERE theme = '{theme}'")
                 row = BotDataBase.cur.fetchone()
                 theme_id = row[0]
                 for word in p["Words"]:
