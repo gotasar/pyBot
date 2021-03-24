@@ -46,7 +46,7 @@ class BotDataBase:
 
     @staticmethod
     def tb_words():
-        BotDataBase.cur.execute("CREATE TABLE users (id SERIAL PRIMARY KEY, " +
+        BotDataBase.cur.execute("CREATE TABLE words (id SERIAL PRIMARY KEY, " +
                                 "theme INTEGER, " +
                                 "en VARCHAR(64)," +
                                 "ru VARCHAR(64))")
@@ -54,13 +54,13 @@ class BotDataBase:
 
     @staticmethod
     def tb_states():
-        BotDataBase.cur.execute("CREATE TABLE users (id SERIAL PRIMARY KEY, " +
+        BotDataBase.cur.execute("CREATE TABLE states (id SERIAL PRIMARY KEY, " +
                                 "state INTEGER")
         BotDataBase.conn.commit()
 
     @staticmethod
     def tb_progress():
-        BotDataBase.cur.execute("CREATE TABLE users (id SERIAL PRIMARY KEY, " +
+        BotDataBase.cur.execute("CREATE TABLE progress (id SERIAL PRIMARY KEY, " +
                                 "user INTEGER, " +
                                 "word INTEGER," +
                                 "grade INTEGER,"
@@ -117,7 +117,7 @@ class BotDataBase:
 
     @staticmethod
     def init():
-        BotDataBase.tb_users()
+        #BotDataBase.tb_users()
         BotDataBase.tb_words()
         BotDataBase.tb_states()
         BotDataBase.tb_themes()
