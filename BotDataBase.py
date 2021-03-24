@@ -49,7 +49,7 @@ class BotDataBase:
     def tb_words():
         BotDataBase.cur.execute("CREATE TABLE words (id SERIAL PRIMARY KEY, " +
                                 "theme INTEGER, " +
-                                "en VARCHAR(64)," +
+                                "en VARCHAR(64), " +
                                 "ru VARCHAR(64))")
         BotDataBase.conn.commit()
 
@@ -63,7 +63,7 @@ class BotDataBase:
     def tb_progress():
         BotDataBase.cur.execute("CREATE TABLE progress (id SERIAL PRIMARY KEY, " +
                                 "user INTEGER, " +
-                                "word INTEGER, " +
+                                "word_id INTEGER, " +
                                 "grade INTEGER, "
                                 "last_date DATE)")
         BotDataBase.conn.commit()
@@ -98,7 +98,7 @@ class BotDataBase:
 
     @staticmethod
     def add_progress(user, word):
-        BotDataBase.cur.execute("INSERT INTO progress (user, word, grade, last_date) " +
+        BotDataBase.cur.execute("INSERT INTO progress (user, word_id, grade, last_date) " +
                                 "VALUES (%i, %i, %i, %d)",
                                 (user, word, 0, datetime.today()))
         BotDataBase.conn.commit()
