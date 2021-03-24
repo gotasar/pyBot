@@ -62,6 +62,7 @@ class BotDataBase:
     @staticmethod
     def tb_progress():
         BotDataBase.cur.execute("CREATE TABLE progress (id SERIAL PRIMARY KEY, " +
+                                "user VARCHAR(64), " +
                                 "last_date timestamp)")
         BotDataBase.conn.commit()
 
@@ -83,7 +84,7 @@ class BotDataBase:
     def add_theme(theme):
         BotDataBase.cur.execute("INSERT INTO themes (theme) " +
                                 "VALUES (%s)",
-                                (theme))
+                                theme)
         BotDataBase.conn.commit()
 
     @staticmethod
