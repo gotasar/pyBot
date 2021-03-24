@@ -2,6 +2,7 @@ import shutil
 import telebot
 from telebot import types
 from keyboard import User, Lesson
+from BotDataBase import BotDataBase
 
 TOKEN = '1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g'
 bot = telebot.TeleBot(TOKEN)
@@ -47,8 +48,11 @@ class BotTranslate:
     @staticmethod
     def start(json):
         id = json['message']['chat']['id']
+        BotDataBase.add_user(json)
+
         dir = f"id{id}"
         shutil.copyfile(r'words.json', f'users/{dir}.json')
+        
         bot.send_message(id, "Пивет, ЧОРТ!", reply_markup=BotKeyboard.start_keyboard())
 
     @staticmethod
@@ -60,6 +64,7 @@ class BotTranslate:
         lesson.user = user
 
         chat_id = json['message']['chat']['id']
+
         lesson.start()
         q = lesson.question()
         if q != -1:
@@ -69,6 +74,7 @@ class BotTranslate:
                 markup.add(types.KeyboardButton(options))
             bot.send_message(chat_id, q["Question"], reply_markup=markup)
         lesson.end()
+
 
     @staticmethod
     def answer(json, words):
@@ -87,13 +93,6 @@ class BotTranslate:
         bot.send_message(chat_id, lesson.answer(words[0], words[1]), reply_markup=BotKeyboard.start_keyboard())
         print(lesson.js)
         lesson.end()
-        #print(lesson.answer(words[0], words[1]))
-
-        """
-        lesson.start()
-        bot.send_message(chat_id, lesson.answer(words[0], words[1]), reply_markup=BotKeyboard.start_keyboard())
-        lesson.end()
-        """
         pass
 
     @staticmethod

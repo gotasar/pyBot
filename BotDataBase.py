@@ -121,10 +121,10 @@ class BotDataBase:
 
     @staticmethod
     def init():
-        #BotDataBase.tb_users()
-        #BotDataBase.tb_words()
-        #BotDataBase.tb_states()
-        #BotDataBase.tb_themes()
-        #BotDataBase.tb_progress()
+        BotDataBase.tb_users()
+        BotDataBase.tb_words()
+        BotDataBase.tb_states()
+        BotDataBase.tb_themes()
+        BotDataBase.tb_progress()
         BotDataBase.add_themes_and_words('words.json')
 

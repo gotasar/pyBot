@@ -68,7 +68,7 @@ def index():
             BotDataBase.connect()
             BotDataBase.init()
         else:
-            words = message.split()
+            words = message.split(': ')
             if len(words) == 2:
                 BotTranslate.answer(r, words)
             else:
