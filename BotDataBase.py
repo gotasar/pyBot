@@ -86,7 +86,7 @@ class BotDataBase:
     def add_theme(theme):
         BotDataBase.cur.execute("INSERT INTO themes (theme) " +
                                 "VALUES (%s)",
-                                (theme, 0))
+                                (theme, ))
         BotDataBase.conn.commit()
 
     @staticmethod
