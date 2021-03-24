@@ -48,7 +48,7 @@ class BotTranslate:
     @staticmethod
     def start(json):
         id = json['message']['chat']['id']
-        BotDataBase.add_user(json)
+        # BotDataBase.add_user(json)
 
         dir = f"id{id}"
         shutil.copyfile(r'words.json', f'users/{dir}.json')
