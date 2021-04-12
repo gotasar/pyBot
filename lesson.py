@@ -60,7 +60,7 @@ class LessonDB:
     def get_words(user_row):
         theme = user_row[3]
         words = []
-        BotDataBase.cur.execute(f"SELECT en, ru FROM word WHERE theme = {theme}")
+        BotDataBase.cur.execute(f"SELECT en, ru FROM words WHERE theme = {theme}")
         for row in BotDataBase.cur:
             words.append({'EN': row[0], 'RU': row[1]})
         return words

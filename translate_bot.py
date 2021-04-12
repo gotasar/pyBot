@@ -59,7 +59,7 @@ class BotTranslate:
     @staticmethod
     def question(json):
         user_id = json['message']['chat']['id']
-        BotDataBase.cur.execute(f"SELECT * FROM users WHERE id = '{user_id}'")
+        # BotDataBase.cur.execute(f"SELECT * FROM users WHERE id = '{user_id}'")
         q = LessonDB.question(json)
         if q != -1:
             markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
