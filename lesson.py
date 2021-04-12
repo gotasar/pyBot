@@ -58,6 +58,7 @@ class LessonDB:
 
     @staticmethod
     def get_words(user_row):
+        print(user_row)
         theme = user_row[3]
         words = []
         BotDataBase.cur.execute(f"SELECT en, ru FROM words WHERE theme = {theme}")
