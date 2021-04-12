@@ -34,7 +34,7 @@ def index():
 
         message = r['message']['text']
         if 'Начать тест' in message:
-            LessonDB.question(r)
+            BotTranslate.question(r)
         elif 'Статистика' in message:
             BotTranslate.statistic(r)
             pass
