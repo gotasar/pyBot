@@ -21,6 +21,8 @@ class LessonDB:
     def question(user_row):
         # Найти слова по теме
         words = LessonDB.get_words(user_row)
+        if words == -1:
+            return -1
         # Создать вопрос и варианты ответов
         random.shuffle(words)
         index = 0
@@ -59,6 +61,8 @@ class LessonDB:
     @staticmethod
     def get_words(user_row):
         print(user_row)
+        if user_row is None:
+            return -1
         theme = user_row[3]
         words = []
         BotDataBase.cur.execute(f"SELECT en, ru FROM words WHERE theme = {theme}")
