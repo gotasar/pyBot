@@ -3,6 +3,7 @@ import telebot
 from telebot import types
 from keyboard import User, Lesson
 from BotDataBase import BotDataBase
+from lesson import LessonDB
 
 TOKEN = '1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g'
 bot = telebot.TeleBot(TOKEN)
@@ -57,6 +58,17 @@ class BotTranslate:
 
     @staticmethod
     def question(json):
+        user_id = json['message']['chat']['id']
+        BotDataBase.cur.execute(f"SELECT * FROM users WHERE id = '{user_id}'")
+        q = LessonDB.question(json)
+        if q != -1:
+            markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+            print(q)
+            for options in q["Answer options"]:
+                markup.add(types.KeyboardButton(options))
+            bot.send_message(user_id, q["Question"], reply_markup=markup)
+
+        """
         user = User()
         user.id = json['message']['chat']['id']
         user.firstName = json['message']['chat']['first_name']
@@ -74,7 +86,7 @@ class BotTranslate:
                 markup.add(types.KeyboardButton(options))
             bot.send_message(chat_id, q["Question"], reply_markup=markup)
         lesson.end()
-
+        """
 
     @staticmethod
     def answer(json, words):
