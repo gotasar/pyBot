@@ -2,7 +2,6 @@ import random
 import json
 
 
-
 class User:
     id = -1
     firstName = "None"
@@ -16,7 +15,6 @@ class Lesson:
     user = User()
     userFile = "None"
     js = "None"
-    #words = []
 
     def get_themes_list(self):
         # Выдать темы
