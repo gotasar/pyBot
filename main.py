@@ -34,6 +34,7 @@ def index():
 
         message = r['message']['text']
         if 'Начать тест' in message:
+            BotDataBase.connect()
             BotTranslate.question(r)
         elif 'Статистика' in message:
             BotTranslate.statistic(r)
