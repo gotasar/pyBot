@@ -4,19 +4,20 @@
 from flask import Flask, request, jsonify
 import requests
 import json
-import telebot
-from telebot import types
-from keyboard import User, Lesson
-import shutil
+# import telebot
+# from telebot import types
+# from keyboard import User, Lesson
+# import shutil
 from translate_bot import BotTranslate, BotKeyboard
 from BotDataBase import BotDataBase
-from lesson import LessonDB
+# from lesson import LessonDB
 
-TOKEN = '1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g'
-bot = telebot.TeleBot(TOKEN)
+from tb_static import TB
 
+bot = TB.get()
 app = Flask(__name__)
-URL = 'https://api.telegram.org/bot1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g/'
+
+# URL = 'https://api.telegram.org/bot1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g/'
 
 
 @app.route('/', methods=['POST', 'GET'])

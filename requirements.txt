@@ -4,4 +4,3 @@ Flask==1.1.2
 Jinja2==2.11.3
 SQLAlchemy==1.4.2
 pyTelegramBotAPI==3.7.6
-
