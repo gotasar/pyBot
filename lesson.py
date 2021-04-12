@@ -6,10 +6,9 @@ class LessonDB:
 
     @staticmethod
     def session(message):
-        user_id = 1       # WARNING no user_id from message
+        user_id = message['message']['chat']['id']
         BotDataBase.cur.execute(f"SELECT * FROM users WHERE id = '{user_id}'")
         row = BotDataBase.cur.fetchone()
-        max_question = 5  # WARNING добавить поле с максимальном числом вопросов in table USERS
         state = row[2]
         if state >= 0:
             LessonDB.answer(row)
@@ -19,7 +18,7 @@ class LessonDB:
         pass
 
     @staticmethod
-    def question(user_row, message):
+    def question(user_row):
         # Найти слова по теме
         words = LessonDB.get_words(user_row)
         # Создать вопрос и варианты ответов
@@ -44,8 +43,7 @@ class LessonDB:
             return -1
 
     @staticmethod
-    def answer(user_row):
-
+    def answer(message, user_row):
         pass
 
     @staticmethod

@@ -10,6 +10,7 @@ from keyboard import User, Lesson
 import shutil
 from translate_bot import BotTranslate, BotKeyboard
 from BotDataBase import BotDataBase
+from lesson import LessonDB
 
 TOKEN = '1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g'
 bot = telebot.TeleBot(TOKEN)
@@ -33,7 +34,7 @@ def index():
 
         message = r['message']['text']
         if 'Начать тест' in message:
-            BotTranslate.question(r)
+            LessonDB.question(r)
         elif 'Статистика' in message:
             BotTranslate.statistic(r)
             pass
