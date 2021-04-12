@@ -74,6 +74,10 @@ class BotDataBase:
     @staticmethod
     def add_user(id, first_name):
         cur = BotDataBase.conn.cursor()
+        cur.execute(f"SELECT * FROM users WHERE id = {id}")
+        row = cur.fetchone()
+        if row is None:
+            return
         cur.execute("INSERT INTO users (id, first_name, state, theme, complexity, grade, num_questions) " +
                     "VALUES (%s, %s, %s, %s, %s, %s, %s)",
                     (id, first_name, 1, 1, 3, 3, 3))
