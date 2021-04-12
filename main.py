@@ -9,7 +9,6 @@ from bot_translator import bot_translator
 
 bot = TB.bot()
 conn = DB.conn()
-
 app = Flask(__name__)
 
 
