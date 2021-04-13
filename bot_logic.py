@@ -25,6 +25,7 @@ def generate_test_question(conn, user_id):
     words = get_words(user_row)
     if words == -1:
         return -1
+
     # Создать вопрос и варианты ответов
     random.shuffle(words)
     index = 0
@@ -66,21 +67,21 @@ def get_words(user_row):
     return words
 
 
-def add_user(id, first_name):
+def add_user(user_id, first_name):
     cur = conn.cursor()
-    cur.execute(f"SELECT * FROM users WHERE id = {id}")
+    cur.execute(f"SELECT * FROM users WHERE id = {user_id}")
     row = cur.fetchone()
     if row is not None:
         return
-    cur.execute("INSERT INTO users (id, first_name, state, theme, complexity, grade, num_questions) " +
-                "VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                (id, first_name, 1, 1, 3, 3, 3))
+    cur.execute("INSERT INTO users (id, first_name, state, theme, complexity, grade, num_questions, " +
+                "last_date, max_question, word, rating)" +
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                (user_id, first_name, 1, 1, 3, 3, 3, "2017-05-12 16:30:22", 30, 0, 0))
     conn.commit()
     cur.execute("SELECT id FROM words")
     for row in cur:
         word_id = row[0]
         print(word_id)
-        user_id = id
         add_progress(user_id, word_id)
     cur.execute("SELECT * FROM users")
     for row in cur:
