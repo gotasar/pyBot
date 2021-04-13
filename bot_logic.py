@@ -60,7 +60,7 @@ def get_words(user_row):
                 f"WHERE words.theme = {theme} AND "
                 f"      progress.user_id = {user_row[0]}")
     for row in cur:
-        words.append({'EN': row[0], 'RU': row[1], 'grade': row[3]})
+        words.append({'EN': row[0], 'RU': row[1], 'grade': row[2]})
     print(f"Words: {words}")
     return words
 
