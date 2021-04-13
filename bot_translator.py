@@ -42,6 +42,7 @@ class bot_translator:
         elif 'Тема: ' in text:
             pass
         elif 'Ответ: ' in text:
+            answer_processing(conn, user_id, text)
             print(f"oTVET {bot} {text} {user_id}")
             bot.send_message(user_id, f"Я получил ответ", reply_markup=BotKeyboard.start_keyboard())
             pass
@@ -63,6 +64,7 @@ def answer_processing(conn, user_id, text):
 
     words = text.split(f'{row[0]}. Ответ: ')
     words = words.split(': ')
+    print(words)
     res = check_answer(conn, user_id, words[0], words[1])
     bot.send_message(user_id, res, reply_markup=BotKeyboard.start_keyboard())
 
