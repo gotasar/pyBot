@@ -52,9 +52,14 @@ def get_words(user_row):
     theme = user_row[3]
     words = []
     cur = conn.cursor()
-    cur.execute(f"SELECT en, ru FROM words WHERE theme = {theme}")
+    cur.execute(f"SELECT words.en, words.ru, progress.grade "
+                f"FROM words "
+                f"  INNER JOIN progress "
+                f"      ON progress.word = words.id"
+                f"WHERE words.theme = {theme} AND"
+                f"      progress.user_id = {user_row[0]}")
     for row in cur:
-        words.append({'EN': row[0], 'RU': row[1]})
+        words.append({'EN': row[0], 'RU': row[1], 'grade': row[3]})
     print(f"Words: {words}")
     return words
 
