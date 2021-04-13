@@ -21,25 +21,25 @@ class bot_translator:
 
         if '/start' == text:
             pass
-        elif 'Начать тест' in message:
+        elif 'Начать тест' == text:
             pass
-        elif 'Статистика' in message:
+        elif 'Статистика' == text:
             pass
-        elif 'Настройка параметров' in message:
+        elif 'Настройка параметров' == text:
             pass
-        elif 'Увеличить сложность' in message:
+        elif 'Увеличить сложность' == text:
             pass
-        elif 'Уменьшить сложность' in message:
+        elif 'Уменьшить сложность' == text:
             pass
-        elif 'Увеличить повторения' in message:
+        elif 'Увеличить повторения' == text:
             pass
-        elif 'Уменьшить повторения' in message:
+        elif 'Уменьшить повторения' == text:
             pass
-        elif 'Сменить тему' in message:
+        elif 'Сменить тему' == text:
             pass
-        elif 'Тема: ' in message:
+        elif 'Тема: ' in text:
             pass
-        elif 'Ответ:' in message:
+        elif 'Ответ: ' in text:
             print(f"oTVET {bot} {text} {user_id}")
             bot.send_message(user_id, f"Я получил ответ", reply_markup=BotKeyboard.start_keyboard())
             pass
