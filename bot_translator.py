@@ -10,7 +10,7 @@ class bot_translator:
     def processing(message):
         user_id = message['message']['chat']['id']
         text = message['message']['text']
-        print(bot + ' ' + text + ' ' + user_id)
+        print(f"{bot} {text} {user_id}")
         bot.send_message(user_id, 'Эхо: ' + text, reply_markup=start_keyboard())
         pass
 
