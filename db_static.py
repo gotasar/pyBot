@@ -5,7 +5,7 @@ class DB:
     conn = None
 
     @staticmethod
-    def conn():
+    def get():
         if DB.conn is None:
             DB.conn = psycopg2.connect(database="dfh4u9ku9r591a",
                                        user="pihbteuhurzhje",

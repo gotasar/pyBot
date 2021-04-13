@@ -14,8 +14,8 @@ from tb_static import TB
 from db_static import DB
 from bot_translator import bot_translator
 
-bot = TB.bot()
-conn = DB.conn()
+bot = TB.get()
+conn = DB.get()
 app = Flask(__name__)
 
 

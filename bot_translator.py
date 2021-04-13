@@ -1,8 +1,8 @@
 from tb_static import TB
 from db_static import DB
 
-bot = TB.bot()
-conn = DB.conn()
+bot = TB.get()
+conn = DB.get()
 
 
 class bot_translator:
