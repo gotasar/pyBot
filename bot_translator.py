@@ -4,14 +4,18 @@ from db_static import DB
 bot = TB.get()
 conn = DB.get()
 
+from bot_logic import generate_test_question
 
 class bot_translator:
     @staticmethod
     def processing(message):
         user_id = message['message']['chat']['id']
         text = message['message']['text']
+        # Echo test without logic
         print(f"{bot} {text} {user_id}")
         bot.send_message(user_id, f"Эхо: {text}", reply_markup=start_keyboard())
+        text = generate_test_question(conn, user_id)
+        bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=start_keyboard())
         pass
 
 
