@@ -63,7 +63,8 @@ def answer_processing(conn, user_id, text):
 
     words = text.split(f'{row[0]}. Ответ: ')
     words = words.split(': ')
-
+    res = check_answer(conn, user_id, words[0], words[1])
+    bot.send_message(user_id, res, reply_markup=BotKeyboard.start_keyboard())
 
 def generate_question(conn, user_id):
     q = generate_test_question(conn, user_id)
@@ -73,3 +74,27 @@ def generate_question(conn, user_id):
         for options in q["Answer options"]:
             markup.add(types.KeyboardButton(options))
         bot.send_message(user_id, q["Question"], reply_markup=markup)
+
+
+def check_answer(conn, user_id, word_en, word_ru):
+    curr = conn.cursor()
+    curr.execute(f"SELECT id, word FROM users WHERE id = {user_id}")
+    row_user = curr.fetchone()
+    res = ''
+
+    # если пользователь найден
+    if row_user is not None:
+        curr.execute(f"SELECT id FROM words WHERE en = '{word_en}' AND ru = '{word_ru}'")
+        row_word = curr.fetchone()
+        # если слово найдено в таблице
+        if row_word is not None:
+            res = "Красавчик"
+            print("Красавчик")
+            curr.execute(
+                f"UPDATE progress SET grade = grade + 1 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
+        else:
+            res = "Нетушки"
+            curr.execute(
+                f"UPDATE progress SET grade = 0 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
+    conn.commit()
+    return res
