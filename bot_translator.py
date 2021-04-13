@@ -11,16 +11,16 @@ class bot_translator:
         user_id = message['message']['chat']['id']
         text = message['message']['text']
         print(f"{bot} {text} {user_id}")
-        # bot.send_message(user_id, 'Эхо: ' + text, reply_markup=start_keyboard())
+        bot.send_message(user_id, f"Эхо: {text}", reply_markup=start_keyboard())
         pass
 
 
-def send_message(bot_d, txt):
-    pass
+#def send_message(bot_d, txt):
+#    pass
 
 
-def test(bot_d, message):
-    pass
+#def test(bot_d, message):
+#    pass
 
 
 from telebot import types
