@@ -39,7 +39,7 @@ class bot_translator:
             pass
         elif 'Тема: ' in message:
             pass
-        elif 'Ответ: ' in message:
+        elif 'Ответ:' in message:
             bot.send_message(user_id, f"Я получил ответ", reply_markup=BotKeyboard.start_keyboard())
             pass
 
