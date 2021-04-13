@@ -9,8 +9,9 @@ class bot_translator:
     @staticmethod
     def processing(message):
         user_id = message['message']['chat']['id']
-        print(bot)
-        #bot.send_message(user_id, "Опять за старое взялся?")
+        text = message['message']['text']
+        print(bot + ' ' + text + ' ' + user_id)
+        bot.send_message(user_id, 'Эхо: ' + text, reply_markup=start_keyboard())
         pass
 
 
@@ -20,3 +21,15 @@ def send_message(bot_d, txt):
 
 def test(bot_d, message):
     pass
+
+
+from telebot import types
+def start_keyboard():
+    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+    btn_start = types.KeyboardButton('Начать тест')
+    btn_statistic = types.KeyboardButton('Статистика')
+    btn_params = types.KeyboardButton('Настройка параметров')
+    markup.add(btn_start)
+    markup.add(btn_statistic)
+    markup.add(btn_params)
+    return markup
