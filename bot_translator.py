@@ -11,7 +11,7 @@ class bot_translator:
         user_id = message['message']['chat']['id']
         text = message['message']['text']
         print(f"{bot} {text} {user_id}")
-        bot.send_message(user_id, 'Эхо: ' + text, reply_markup=start_keyboard())
+        # bot.send_message(user_id, 'Эхо: ' + text, reply_markup=start_keyboard())
         pass
 
 
