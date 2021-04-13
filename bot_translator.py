@@ -12,6 +12,10 @@ class bot_translator:
     @staticmethod
     def processing(message):
         user_id = message['message']['chat']['id']
+
+        if 'username' not in message['message']['chat']:
+            return
+
         user_name = message['message']['chat']['username']
 
         if 'text' not in message['message']:
