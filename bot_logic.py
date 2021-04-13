@@ -18,6 +18,7 @@ def generate_test_question(conn, user_id):
         add_user(user_id, "TestName")
         cur.execute(f"SELECT * FROM users WHERE id = {user_id}")
         user_row = cur.fetchone()
+        return -1
 
     # Найти слова по теме
     words = get_words(user_row)
