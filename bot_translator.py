@@ -2,6 +2,7 @@ from tb_static import TB
 from db_static import DB
 from bot_logic import generate_test_question
 from bot_keyboard import BotKeyboard
+from telebot import types
 
 bot = TB.get()
 conn = DB.get()
@@ -22,6 +23,7 @@ class bot_translator:
         if '/start' == text:
             pass
         elif 'Начать тест' == text:
+            generate_question(conn, user_id)
             pass
         elif 'Статистика' == text:
             pass
@@ -51,3 +53,23 @@ class bot_translator:
         bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
 
 
+def answer_processing(conn, user_id, text):
+    cur = conn.cursor()
+    cur.execute(f'SELECT num_questions FROM users WHERE = {user_id}')
+    row = cur.fetchone()
+
+    if f'{row[0]}. Ответ: ' not in text:
+        return
+
+    words = text.split(f'{row[0]}. Ответ: ')
+    words = words.split(': ')
+
+
+def generate_question(conn, user_id):
+    q = generate_test_question(conn, user_id)
+    if q != -1:
+        markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+        print(q)
+        for options in q["Answer options"]:
+            markup.add(types.KeyboardButton(options))
+        bot.send_message(user_id, q["Question"], reply_markup=markup)

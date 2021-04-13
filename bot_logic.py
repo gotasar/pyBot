@@ -32,11 +32,12 @@ def generate_test_question(conn, user_id):
     o = []
     grade = user_row[5]
     complexity = user_row[4]
+    num_questions = user_row[6]
     for word in words:
         index += 1
         if word["grade"] < grade:
             q = f"Переведите: {word['EN']}"
-            o.append(f"{word['EN']}: {word['RU']}")
+            o.append(f"{num_questions}. Ответ: {word['EN']}: {word['RU']}")
             i = 1
             while i < complexity:
                 o.append(f"{word['EN']}: {words[(index + i + 2) % len(words)]['RU']}")
