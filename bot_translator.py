@@ -56,7 +56,7 @@ class bot_translator:
 
 def answer_processing(conn, user_id, text):
     cur = conn.cursor()
-    cur.execute(f'SELECT num_questions FROM users WHERE = {user_id}')
+    cur.execute(f'SELECT num_questions FROM users WHERE id = {user_id}')
     row = cur.fetchone()
 
     if f'{row[0]}. Ответ: ' not in text:
