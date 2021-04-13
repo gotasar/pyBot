@@ -1,5 +1,12 @@
 # https://api.telegram.org/bot1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g/setWebhook?url=https://thawing-badlands-72124.herokuapp.com/
 # ssh -R 80:localhost:5000 localhost.run
+# web: gunicorn main:app
+# worker: python main.py 5000
+# heroku addons:create heroku-postgresql:hobby-dev
+# Created postgresql-metric-65240 as DATABASE_URL
+# pip install psycopg2-binary
+# heroku ps:scale web=1
+# heroku logs --tail
 
 from flask import Flask, request, jsonify
 

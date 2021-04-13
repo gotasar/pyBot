@@ -9,7 +9,7 @@ class bot_translator:
     @staticmethod
     def processing(message):
         user_id = message['message']['chat']['id']
-        bot.send_message(user_id, "Опять за старое взялся?")
+        #bot.send_message(user_id, "Опять за старое взялся?")
         pass
 
 
