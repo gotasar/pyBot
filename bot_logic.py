@@ -15,6 +15,7 @@ def generate_test_question(conn, user_id):
 
     # Pls delete this
     if user_row is None:
+        bot.send_message(user_id, f"Who are you? I dont know you!")
         add_user(user_id, "TestName")
         cur.execute(f"SELECT * FROM users WHERE id = {user_id}")
         user_row = cur.fetchone()
