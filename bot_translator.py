@@ -67,6 +67,7 @@ def answer_processing(conn, user_id, text):
         return
 
     words = text.split(f'{row[0]}. Ответ: ')
+    print(words)
     words = words[0].split(': ')
     print(words)
     res = check_answer(conn, user_id, words[0], words[1])
