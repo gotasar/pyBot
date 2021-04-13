@@ -40,7 +40,7 @@ def generate_test_question(conn, user_id):
             o.append(f"{num_questions}. Ответ: {word['EN']}: {word['RU']}")
             i = 1
             while i < complexity:
-                o.append(f"{word['EN']}: {words[(index + i + 2) % len(words)]['RU']}")
+                o.append(f"{num_questions}. Ответ: {word['EN']}: {words[(index + i + 2) % len(words)]['RU']}")
                 i += 1
             random.shuffle(o)
             res = {"Question": q, "Answer options": o}

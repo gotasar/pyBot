@@ -48,9 +48,9 @@ class bot_translator:
 
         # Echo test without logic
         print(f"{bot} {text} {user_id}")
-        bot.send_message(user_id, f"Эхо: {text}", reply_markup=BotKeyboard.start_keyboard())
+        #bot.send_message(user_id, f"Эхо: {text}", reply_markup=BotKeyboard.start_keyboard())
         text = generate_test_question(conn, user_id)
-        bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
+        #bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
 
 
 def answer_processing(conn, user_id, text):
