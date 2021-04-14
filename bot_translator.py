@@ -56,7 +56,7 @@ class bot_translator:
             bot.send_message(user_id, f"Эхо: {text}", reply_markup=BotKeyboard.start_keyboard())
             text = generate_test_question(conn, user_id)
             bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
-            delete_all_progress_users(conn)
+            # delete_all_progress_users(conn)
 
 
 def delete_all_progress_users(conn):
