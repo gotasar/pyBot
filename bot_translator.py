@@ -169,9 +169,12 @@ def get_statistic(conn, user_id):
                  'INNER JOIN themes ON themes.id = words.theme ' +
                  f'WHERE users.id = {user_id} '
                  f'GROUP BY users.id, users.first_name, users.grade, themes.theme ')
+    row = curr.fetchone()
+    if row is None:
+        return
+    bot.send_message(user_id, f'Пользователь: {row[1]}', reply_markup=BotKeyboard.start_keyboard())
+    print(f'Тема: {row[3]}  — {"{0:.2f}".format(row[4] / row[2] * 100)} %')
     for row in curr:
-        #print(row)
-        bot.send_message(user_id, f'Пользователь: {row[1]}', reply_markup=BotKeyboard.start_keyboard())
         print(f'Пользователь: {row[1]}')
         bot.send_message(user_id, f'Тема: {row[3]}  — {"{0:.2f}".format(row[4]/row[2] * 100) } %', reply_markup=BotKeyboard.start_keyboard())
-        print(f'Тема: {row[3]}  — {"{0:.2f}".format(row[4]/row[2] * 100) } %')
+
