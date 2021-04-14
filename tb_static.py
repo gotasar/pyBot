@@ -7,6 +7,6 @@ class TB:
     @staticmethod
     def get():
         if TB.bot is None:
-            token = '1671733318:AAGZe8uuEOkQtTwT8McKa9LyV5JhQGTwt5g'
+            token = '1610355784:AAHUz0b-GSk8iOlwlrR0jiLTkAeXYEOcw1M'
             TB.bot = telebot.TeleBot(token)
         return TB.bot
