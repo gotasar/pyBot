@@ -31,7 +31,7 @@ class bot_translator:
         text = message['message']['text']
 
         cur = conn.cursor()
-        cur.execute(f"SELECT state FROM users WHERE id = {user_id}")
+        cur.execute(f"SELECT * FROM users WHERE id = {user_id}")
         row = cur.fetchone()
         if row is None:
             add_user(user_id, user_name)
