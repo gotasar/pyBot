@@ -19,8 +19,8 @@ class bot_translator:
 
         user_id = message['message']['chat']['id']
 
-        if 'username' not in message['message']['chat']:
-            return
+        #if 'username' not in message['message']['chat']:
+        #    return
 
         user_name = message['message']['chat']['username']
         print(f"user_name: {user_name}")
