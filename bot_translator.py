@@ -37,6 +37,8 @@ class bot_translator:
             add_user(user_id, user_name)
             bot.send_message(user_id, f"Привет {user_name}",
                              reply_markup=BotKeyboard.start_keyboard())
+            print("jasdhjdsahdkjashdkjsahdkjashdkjahsdkjahskjdhashdkjasksdajah")
+            conn.commit()
             return
         if row[0] == 0:
             if '/start' == text:
