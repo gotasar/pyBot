@@ -73,7 +73,7 @@ def delete_all_progress_users(conn):
 
 def start_test(conn, user_id):
     cur = conn.cursor()
-    cur.execute(f"UPDATE users SET num_questions = 1 WHERE id = {user_id} ")
+    cur.execute(f"UPDATE users SET num_questions = 1, rating = 0 WHERE id = {user_id} ")
     generate_question(conn, user_id)
     conn.commit()
 
