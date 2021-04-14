@@ -77,6 +77,9 @@ def answer_processing(conn, user_id, text):
     cur.execute(f'SELECT num_questions, max_question FROM users WHERE id = {user_id}')
     row = cur.fetchone()
 
+    if row is None:
+        return
+
     if f'{row[0]}. Ответ: ' not in text:
         return
 
