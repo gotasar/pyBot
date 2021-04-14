@@ -27,7 +27,7 @@ class bot_translator:
         if '/start' == text:
             pass
         elif 'Начать тест' == text:
-            generate_question(conn, user_id)
+            start_test(conn, user_id)
             pass
         elif 'Статистика' == text:
             get_statistic(conn, user_id)
@@ -58,7 +58,7 @@ class bot_translator:
             bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
 
 
-def start_test(conn,user_id):
+def start_test(conn, user_id):
     cur = conn.cursor()
     cur.execute(f"UPDATE users SET num_questions = 1 WHERE id = {user_id} ")
     generate_question(conn, user_id)
