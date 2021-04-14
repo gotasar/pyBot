@@ -91,13 +91,13 @@ def switch_theme(conn, user_id, text):
     theme = text.split(f'Тема: ')
     theme = theme[1]
     cur = conn.cursor()
-    cur.execute(f'SELECT id FROM themes WHERE theme = "{theme}"')
+    cur.execute(f"SELECT id FROM themes WHERE theme = '{theme}'")
 
     row = cur.fetchone()
     if row is None:
         return
 
-    cur.execute(f'UPDATE users SET theme = {row[0]} WHERE id = "{user_id}"')
+    cur.execute(f"UPDATE users SET theme = {row[0]} WHERE id = {user_id}")
     bot.send_message(user_id, "Тема изменена", reply_markup=BotKeyboard.start_keyboard())
 
 
