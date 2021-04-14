@@ -98,8 +98,8 @@ def switch_theme(conn, user_id, text):
         return
 
     cur.execute(f"UPDATE users SET theme = {row[0]} WHERE id = {user_id}")
+    conn.commit()
     bot.send_message(user_id, "Тема изменена", reply_markup=BotKeyboard.start_keyboard())
-
 
 def complexity_add(conn, user_id, delta):
     cur = conn.cursor()
