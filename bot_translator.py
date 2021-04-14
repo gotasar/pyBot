@@ -34,6 +34,9 @@ class bot_translator:
         elif 'Начать тест' == text:
             start_test(conn, user_id)
             pass
+        elif 'Остановить тест' == text:
+            stop_test(conn, user_id)
+            pass
         elif 'Статистика' == text:
             get_statistic(conn, user_id)
             pass
@@ -88,8 +91,6 @@ def stop_test(conn, user_id):
     bot.send_message(user_id, f"Тест завершен")
     bot.send_message(user_id, f"Правильность на {row[0]} из {row[1]}", reply_markup=BotKeyboard.start_keyboard())
 
-    cur.execute(f"UPDATE users SET num_questions = 1 WHERE id = {user_id} ")
-    generate_question(conn, user_id)
     conn.commit()
 
 
@@ -113,6 +114,7 @@ def answer_processing(conn, user_id, text):
 
     if row[0] == row[1]:
         bot.send_message(user_id, res, reply_markup=BotKeyboard.start_keyboard())
+        stop_test(conn, user_id)
     else:
         num_add(conn, user_id, 1)
         bot.send_message(user_id, res)
@@ -132,6 +134,7 @@ def generate_question(conn, user_id):
         print(q)
         for options in q["Answer options"]:
             markup.add(types.KeyboardButton(options))
+        markup.add(types.KeyboardButton('Остановить тест'))
         bot.send_message(user_id, q["Question"], reply_markup=markup)
 
 
