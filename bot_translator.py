@@ -23,12 +23,14 @@ class bot_translator:
             return
 
         user_name = message['message']['chat']['username']
+        print(f"user_name: {user_name}")
 
         if 'text' not in message['message']:
             bot.send_message(user_id, f"Опять за старое взялся? {user_name}!", reply_markup=BotKeyboard.start_keyboard())
             return
 
         text = message['message']['text']
+        print(f"text: {text}")
 
         cur = conn.cursor()
         cur.execute(f"SELECT * FROM users WHERE id = {user_id}")
@@ -40,6 +42,7 @@ class bot_translator:
             print("jasdhjdsahdkjashdkjsahdkjashdkjahsdkjahskjdhashdkjasksdajah")
             conn.commit()
             return
+
         if row[0] == 0:
             if '/start' == text:
                 bot.send_message(user_id, f"Привет {user_name}",
