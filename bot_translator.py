@@ -52,12 +52,10 @@ class bot_translator:
             elif 'Уменьшить сложность' == text:
                 complexity_add(conn, user_id, -1)
             elif 'Увеличить повторения' == text:
-                bot.send_message(user_id, f"Увеличить повторения",
-                                 reply_markup=BotKeyboard.start_keyboard())
+                question_add(conn, user_id, 1)
                 pass
             elif 'Уменьшить повторения' == text:
-                bot.send_message(user_id, f"Уменьшить повторения",
-                                 reply_markup=BotKeyboard.start_keyboard())
+                question_add(conn, user_id, -1)
                 pass
             elif 'Сменить тему' == text:
                 bot.send_message(user_id, f"Сменить тему",
@@ -97,6 +95,24 @@ def complexity_add(conn, user_id, delta):
     cur.execute(f"UPDATE users SET complexity = {complexity} WHERE id = {user_id}")
     conn.commit()
     bot.send_message(user_id, "Сложность изменена", reply_markup=BotKeyboard.start_keyboard())
+
+
+def question_add(conn, user_id, delta):
+    cur = conn.cursor()
+    cur.execute(f"SELECT max_question FROM users WHERE id = {user_id}")
+    row = cur.fetchone()
+    if row is None:
+        return
+    max_question = row[0] + delta
+    if max_question > 10:
+        max_question = 10
+    if max_question < 3:
+        max_question = 3
+
+    cur.execute(f"UPDATE users SET max_question = {max_question} WHERE id = {user_id}")
+    conn.commit()
+    bot.send_message(user_id, f"Текущее количество вопросов тесте: {max_question}", reply_markup=BotKeyboard.start_keyboard())
+
 
 def delete_all_progress_users(conn):
     curr = conn.cursor()
