@@ -18,14 +18,12 @@ class bot_translator:
             return
 
         user_id = message['message']['chat']['id']
-        user_name = ""
+        user_name = "ErrorName"
         if 'username' in message['message']['chat']:
             user_name = message['message']['chat']['username']
-            return
 
         if 'first_name' in message['message']['chat']:
             user_name = message['message']['chat']['first_name']
-            return
 
         print(f"user_name: {user_name}")
 
