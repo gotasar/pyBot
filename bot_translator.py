@@ -58,12 +58,10 @@ class bot_translator:
                 question_add(conn, user_id, -1)
                 pass
             elif 'Сменить тему' == text:
-                bot.send_message(user_id, f"Сменить тему",
-                                 reply_markup=BotKeyboard.start_keyboard())
+                theme_options(conn, user_id)
                 pass
             elif 'Тема: ' in text:
-                bot.send_message(user_id, text,
-                                 reply_markup=BotKeyboard.start_keyboard())
+                switch_theme(conn, user_id, text)
                 pass
         if row[0] == 1:
             if 'Ответ: ' in text:
@@ -78,6 +76,29 @@ class bot_translator:
                 text = generate_test_question(conn, user_id)
                 #bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
                 # delete_all_progress_users(conn)
+
+
+def theme_options(conn, user_id):
+    cur = conn.cursor()
+    cur.execute('SELECT theme FROM themes')
+    themes = []
+    for row in cur:
+        themes.append(row[0])
+    bot.send_message(user_id, "Выберите тему", reply_markup=BotKeyboard.theme_keyboard(themes))
+
+
+def switch_theme(conn, user_id, text):
+    theme = text.split(f'Тема: ')
+    theme = theme[1]
+    cur = conn.cursor()
+    cur.execute(f'SELECT id FROM themes WHERE theme = "{theme}"')
+
+    row = cur.fetchone()
+    if row is None:
+        return
+
+    cur.execute(f'UPDATE users SET theme = {row[0]} WHERE id = "{user_id}"')
+    bot.send_message(user_id, "Тема изменена", reply_markup=BotKeyboard.start_keyboard())
 
 
 def complexity_add(conn, user_id, delta):
