@@ -28,43 +28,47 @@ class bot_translator:
 
         text = message['message']['text']
 
-
-        if '/start' == text:
-            pass
-        elif 'Начать тест' == text:
-            start_test(conn, user_id)
-            pass
-        elif 'Остановить тест' == text:
-            stop_test(conn, user_id)
-            pass
-        elif 'Статистика' == text:
-            get_statistic(conn, user_id)
-            pass
-        elif 'Настройка параметров' == text:
-            pass
-        elif 'Увеличить сложность' == text:
-            pass
-        elif 'Уменьшить сложность' == text:
-            pass
-        elif 'Увеличить повторения' == text:
-            pass
-        elif 'Уменьшить повторения' == text:
-            pass
-        elif 'Сменить тему' == text:
-            pass
-        elif 'Тема: ' in text:
-            pass
-        elif 'Ответ: ' in text:
-            answer_processing(conn, user_id, text)
-            print(f"oTVET {bot} {text} {user_id}")
-            #bot.send_message(user_id, f"Я получил ответ", reply_markup=BotKeyboard.start_keyboard())
-        else:
-            # Echo test without logic
-            print(f"{bot} {text} {user_id}")
-            bot.send_message(user_id, f"Эхо: {text}", reply_markup=BotKeyboard.start_keyboard())
-            text = generate_test_question(conn, user_id)
-            bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
-            # delete_all_progress_users(conn)
+        cur = conn.cursor()
+        cur.execute(f"SELECT state FROM users WHERE id = {user_id}")
+        row = cur.fetchone()
+        if row is None:
+            return
+        if row == 0:
+            if '/start' == text:
+                pass
+            elif 'Начать тест' == text:
+                start_test(conn, user_id)
+                pass
+            elif 'Статистика' == text:
+                get_statistic(conn, user_id)
+                pass
+            elif 'Настройка параметров' == text:
+                pass
+            elif 'Увеличить сложность' == text:
+                pass
+            elif 'Уменьшить сложность' == text:
+                pass
+            elif 'Увеличить повторения' == text:
+                pass
+            elif 'Уменьшить повторения' == text:
+                pass
+            elif 'Сменить тему' == text:
+                pass
+            elif 'Тема: ' in text:
+                pass
+        if row == 1:
+            if 'Ответ: ' in text:
+                answer_processing(conn, user_id, text)
+                print(f"oTVET {bot} {text} {user_id}")
+            elif 'Остановить тест' == text:
+                stop_test(conn, user_id)
+            else:
+                # Echo test without logic
+                print(f"{bot} {text} {user_id}")
+                bot.send_message(user_id, f"Эхо: {text}", reply_markup=BotKeyboard.start_keyboard())
+                text = generate_test_question(conn, user_id)
+                bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
+                # delete_all_progress_users(conn)
 
 
 def delete_all_progress_users(conn):
@@ -76,7 +80,7 @@ def delete_all_progress_users(conn):
 
 def start_test(conn, user_id):
     cur = conn.cursor()
-    cur.execute(f"UPDATE users SET num_questions = 1, rating = 0 WHERE id = {user_id} ")
+    cur.execute(f"UPDATE users SET num_questions = 1, rating = 0, state = 1 WHERE id = {user_id} ")
     generate_question(conn, user_id)
     conn.commit()
 
@@ -90,6 +94,8 @@ def stop_test(conn, user_id):
 
     bot.send_message(user_id, f"Тест завершен")
     bot.send_message(user_id, f"Правильность на {row[0]} из {row[1]}", reply_markup=BotKeyboard.start_keyboard())
+
+    cur.execute(f"UPDATE users SET state = 0 WHERE id = {user_id} ")
 
     conn.commit()
 
