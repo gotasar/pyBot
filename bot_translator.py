@@ -48,13 +48,9 @@ class bot_translator:
                                  reply_markup=BotKeyboard.setting_keyboard())
                 pass
             elif 'Увеличить сложность' == text:
-                bot.send_message(user_id, f"Увеличить сложность",
-                                 reply_markup=BotKeyboard.start_keyboard())
-                pass
+                complexity_add(conn, user_id, 1)
             elif 'Уменьшить сложность' == text:
-                bot.send_message(user_id, f"Уменьшить сложность",
-                                 reply_markup=BotKeyboard.start_keyboard())
-                pass
+                complexity_add(conn, user_id, -1)
             elif 'Увеличить повторения' == text:
                 bot.send_message(user_id, f"Увеличить повторения",
                                  reply_markup=BotKeyboard.start_keyboard())
@@ -85,6 +81,22 @@ class bot_translator:
                 #bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
                 # delete_all_progress_users(conn)
 
+
+def complexity_add(conn, user_id, delta):
+    cur = conn.cursor()
+    cur.execute(f"SELECT complexity FROM users WHERE id = {user_id}")
+    row = cur.fetchone()
+    if row is None:
+        return
+    complexity = row[0] + delta
+    if complexity > 5:
+        complexity = 5
+    if complexity < 3:
+        complexity = 3
+
+    cur.execute(f"UPDATE users SET complexity = {complexity} WHERE id = {user_id}")
+    conn.commit()
+    bot.send_message(user_id, "Сложность изменена", reply_markup=BotKeyboard.start_keyboard())
 
 def delete_all_progress_users(conn):
     curr = conn.cursor()
