@@ -11,6 +11,10 @@ conn = DB.get()
 class bot_translator:
     @staticmethod
     def processing(message):
+
+        if 'message' not in message:
+            return
+
         user_id = message['message']['chat']['id']
 
         if 'username' not in message['message']['chat']:
