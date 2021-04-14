@@ -49,13 +49,19 @@ class bot_translator:
         elif 'Ответ: ' in text:
             answer_processing(conn, user_id, text)
             print(f"oTVET {bot} {text} {user_id}")
-            bot.send_message(user_id, f"Я получил ответ", reply_markup=BotKeyboard.start_keyboard())
+            #bot.send_message(user_id, f"Я получил ответ", reply_markup=BotKeyboard.start_keyboard())
         else:
             # Echo test without logic
             print(f"{bot} {text} {user_id}")
             bot.send_message(user_id, f"Эхо: {text}", reply_markup=BotKeyboard.start_keyboard())
             text = generate_test_question(conn, user_id)
             bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
+
+
+def start_test(conn,user_id):
+    cur = conn.cursor()
+    cur.execute(f"UPDATE users SET num_questions = 1 WHERE id = {user_id} ")
+    generate_question(conn, user_id)
 
 
 def answer_processing(conn, user_id, text):
