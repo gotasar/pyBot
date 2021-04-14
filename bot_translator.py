@@ -104,12 +104,23 @@ def check_answer(conn, user_id, word_en, word_ru):
 
         else:
             res = "Нетушки"
+
+            # Reset progress en word
             curr.execute(f"SELECT id FROM words WHERE en = '{word_en}'")
             row_word = curr.fetchone()
             if row_word is None:
                 return
             curr.execute(
                 f"UPDATE progress SET grade = 0 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
+
+            # Reset progress ru word
+            curr.execute(f"SELECT id FROM words WHERE ru = '{word_ru}'")
+            row_word = curr.fetchone()
+            if row_word is None:
+                return
+            curr.execute(
+                f"UPDATE progress SET grade = 0 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
+
     conn.commit()
     return res
 
