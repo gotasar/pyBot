@@ -30,6 +30,7 @@ class bot_translator:
             generate_question(conn, user_id)
             pass
         elif 'Статистика' == text:
+            get_statistic(conn, user_id)
             pass
         elif 'Настройка параметров' == text:
             pass
