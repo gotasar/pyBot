@@ -3,6 +3,7 @@ from db_static import DB
 from bot_logic import generate_test_question
 from bot_keyboard import BotKeyboard
 from telebot import types
+from datetime import datetime
 
 bot = TB.get()
 conn = DB.get()
@@ -95,7 +96,7 @@ def stop_test(conn, user_id):
     bot.send_message(user_id, f"Тест завершен")
     bot.send_message(user_id, f"Правильность на {row[0]} из {row[1]}", reply_markup=BotKeyboard.start_keyboard())
 
-    cur.execute(f"UPDATE users SET state = 0 WHERE id = {user_id} ")
+    cur.execute(f"UPDATE users SET state = 0, last_date = {datetime.today()} WHERE id = {user_id} ")
 
     conn.commit()
 
