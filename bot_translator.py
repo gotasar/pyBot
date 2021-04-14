@@ -46,7 +46,7 @@ class bot_translator:
             return
 
         cur = conn.cursor()
-        cur.execute(f"SELECT state FROM users WHERE id = {user_id}")
+        cur.execute(f"SELECT state FROM users WHERE id = {user_id} ")
         row = cur.fetchone()
 
         if row[0] == 0:
