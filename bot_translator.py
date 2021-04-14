@@ -56,6 +56,14 @@ class bot_translator:
             bot.send_message(user_id, f"Эхо: {text}", reply_markup=BotKeyboard.start_keyboard())
             text = generate_test_question(conn, user_id)
             bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
+            delete_all_progress_users(conn)
+
+
+def delete_all_progress_users(conn):
+    curr = conn.cursor()
+    curr.execute("DELETE FROM users")
+    curr.execute("DELETE FROM progress")
+    conn.commit()
 
 
 def start_test(conn, user_id):
@@ -85,6 +93,7 @@ def answer_processing(conn, user_id, text):
         num_add(conn, user_id, 1)
         bot.send_message(user_id, res)
         generate_question(conn, user_id)
+
 
 def num_add(conn, user_id, delta):
     cur = conn.cursor()
