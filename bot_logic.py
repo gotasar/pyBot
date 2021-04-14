@@ -77,7 +77,7 @@ def add_user(user_id, first_name):
     cur.execute("INSERT INTO users (id, first_name, state, theme, complexity, grade, num_questions, " +
                 "last_date, max_question, word, rating)" +
                 "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                (user_id, first_name, 1, 1, 3, 3, 3, "2017-05-12 16:30:22", 30, 0, 0))
+                (user_id, first_name, 1, 1, 3, 5, 3, "2017-05-12 16:30:22", 5, 0, 0))
     conn.commit()
     cur.execute("SELECT id FROM words")
     for row in cur:
