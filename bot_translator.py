@@ -93,7 +93,7 @@ def answer_processing(conn, user_id, text):
     words = words[1].split(': ')
     print(words)
     res = check_answer(conn, user_id, words[0], words[1])
-    bot.send_message(user_id, res, reply_markup=BotKeyboard.start_keyboard())
+    # bot.send_message(user_id, res, reply_markup=BotKeyboard.start_keyboard())
 
     if row[0] == row[1]:
         bot.send_message(user_id, res, reply_markup=BotKeyboard.start_keyboard())
