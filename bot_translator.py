@@ -45,6 +45,10 @@ class bot_translator:
             conn.commit()
             return
 
+        cur = conn.cursor()
+        cur.execute(f"SELECT * FROM users WHERE id = {user_id}")
+        row = cur.fetchone()
+
         if row[0] == 0:
             if '/start' == text:
                 bot.send_message(user_id, f"Привет {user_name}",
