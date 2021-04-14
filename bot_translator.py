@@ -28,6 +28,7 @@ class bot_translator:
 
         text = message['message']['text']
 
+
         if '/start' == text:
             pass
         elif 'Начать тест' == text:
@@ -72,6 +73,21 @@ def delete_all_progress_users(conn):
 
 def start_test(conn, user_id):
     cur = conn.cursor()
+    cur.execute(f"UPDATE users SET num_questions = 1 WHERE id = {user_id} ")
+    generate_question(conn, user_id)
+    conn.commit()
+
+
+def stop_test(conn, user_id):
+    cur = conn.cursor()
+    cur.execute(f"SELECT rating, max_question FROM users WHERE id = {user_id}")
+    row = cur.fetchone()
+    if row is None:
+        return
+
+    bot.send_message(user_id, f"Тест завершен")
+    bot.send_message(user_id, f"Правильность на {row[0]} из {row[1]}", reply_markup=BotKeyboard.start_keyboard())
+
     cur.execute(f"UPDATE users SET num_questions = 1 WHERE id = {user_id} ")
     generate_question(conn, user_id)
     conn.commit()
@@ -134,7 +150,7 @@ def check_answer(conn, user_id, word_en, word_ru):
             res = "Красавчик"
             print("Красавчик")
             curr.execute(
-                f"UPDATE progress SET grade = grade + 1 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
+                f"UPDATE progress SET grade = grade + 1, rating = rating + 1 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
 
         else:
             res = "Нетушки"
@@ -180,4 +196,6 @@ def get_statistic(conn, user_id):
         print(f'Пользователь: {row[1]}')
         bot.send_message(user_id, f'Тема: {row[3]}  — {"{0:.2f}".format(row[4]/row[2] * 100) } %',
                          reply_markup=BotKeyboard.start_keyboard())
+
+
 
