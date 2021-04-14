@@ -81,6 +81,10 @@ class bot_translator:
                 text = generate_test_question(conn, user_id)
                 #bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
                 # delete_all_progress_users(conn)
+        else:
+            bot.send_message(user_id, f"Привет {user_name}",
+                             reply_markup=BotKeyboard.start_keyboard())
+
 
 
 def theme_options(conn, user_id):
