@@ -150,7 +150,9 @@ def check_answer(conn, user_id, word_en, word_ru):
             res = "Красавчик"
             print("Красавчик")
             curr.execute(
-                f"UPDATE progress SET grade = grade + 1, rating = rating + 1 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
+                f"UPDATE progress SET grade = grade + 1 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
+            curr.execute(
+                f"UPDATE users SET rating = rating + 1 WHERE id = {user_id}")
 
         else:
             res = "Нетушки"
