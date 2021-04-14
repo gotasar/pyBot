@@ -101,6 +101,7 @@ def switch_theme(conn, user_id, text):
     conn.commit()
     bot.send_message(user_id, "Тема изменена", reply_markup=BotKeyboard.start_keyboard())
 
+
 def complexity_add(conn, user_id, delta):
     cur = conn.cursor()
     cur.execute(f"SELECT complexity FROM users WHERE id = {user_id}")
@@ -223,9 +224,9 @@ def check_answer(conn, user_id, word_en, word_ru):
             res = "Красавчик"
             print("Красавчик")
             curr.execute(
-                f"UPDATE progress SET grade = grade + 1 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
+                f"UPDATE progress SET grade = grade + 1, last_date = '{datetime.today()}' WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
             curr.execute(
-                f"UPDATE users SET rating = rating + 1 WHERE id = {user_id}")
+                f"UPDATE users SET rating = rating + 1, last_date = '{datetime.today()}' WHERE id = {user_id}")
 
         else:
             res = "Нетушки"
