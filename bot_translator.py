@@ -13,7 +13,7 @@ conn = DB.get()
 class bot_translator:
     @staticmethod
     def processing(message):
-
+        print(message)
         if 'message' not in message:
             return
 
@@ -42,7 +42,8 @@ class bot_translator:
             return
         if row[0] == 0:
             if '/start' == text:
-
+                bot.send_message(user_id, f"Привет {user_name}",
+                                 reply_markup=BotKeyboard.start_keyboard())
                 pass
             elif 'Начать тест' == text:
                 start_test(conn, user_id)
