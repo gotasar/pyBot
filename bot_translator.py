@@ -74,6 +74,7 @@ def start_test(conn, user_id):
     cur = conn.cursor()
     cur.execute(f"UPDATE users SET num_questions = 1 WHERE id = {user_id} ")
     generate_question(conn, user_id)
+    conn.commit()
 
 
 def answer_processing(conn, user_id, text):
