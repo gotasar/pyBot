@@ -173,8 +173,11 @@ def get_statistic(conn, user_id):
     if row is None:
         return
     bot.send_message(user_id, f'Пользователь: {row[1]}', reply_markup=BotKeyboard.start_keyboard())
+    bot.send_message(user_id, f'Тема: {row[3]}  — {"{0:.2f}".format(row[4] / row[2] * 100)} %',
+                     reply_markup=BotKeyboard.start_keyboard())
     print(f'Тема: {row[3]}  — {"{0:.2f}".format(row[4] / row[2] * 100)} %')
     for row in curr:
         print(f'Пользователь: {row[1]}')
-        bot.send_message(user_id, f'Тема: {row[3]}  — {"{0:.2f}".format(row[4]/row[2] * 100) } %', reply_markup=BotKeyboard.start_keyboard())
+        bot.send_message(user_id, f'Тема: {row[3]}  — {"{0:.2f}".format(row[4]/row[2] * 100) } %',
+                         reply_markup=BotKeyboard.start_keyboard())
 
