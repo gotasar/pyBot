@@ -33,7 +33,7 @@ class bot_translator:
         row = cur.fetchone()
         if row is None:
             return
-        if row == 0:
+        if row[0] == 0:
             if '/start' == text:
                 pass
             elif 'Начать тест' == text:
@@ -56,7 +56,7 @@ class bot_translator:
                 pass
             elif 'Тема: ' in text:
                 pass
-        if row == 1:
+        if row[0] == 1:
             if 'Ответ: ' in text:
                 answer_processing(conn, user_id, text)
                 print(f"oTVET {bot} {text} {user_id}")
