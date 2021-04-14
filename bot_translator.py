@@ -4,6 +4,7 @@ from bot_logic import generate_test_question
 from bot_keyboard import BotKeyboard
 from telebot import types
 from datetime import datetime
+from bot_logic import add_user
 
 bot = TB.get()
 conn = DB.get()
@@ -33,6 +34,7 @@ class bot_translator:
         cur.execute(f"SELECT state FROM users WHERE id = {user_id}")
         row = cur.fetchone()
         if row is None:
+            add_user(conn, user_id)
             return
         if row[0] == 0:
             if '/start' == text:
