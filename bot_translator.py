@@ -100,6 +100,7 @@ def check_answer(conn, user_id, word_en, word_ru):
             print("Красавчик")
             curr.execute(
                 f"UPDATE progress SET grade = grade + 1 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
+
         else:
             res = "Нетушки"
             curr.execute(f"SELECT id FROM words WHERE en = '{word_en}'")
@@ -110,3 +111,21 @@ def check_answer(conn, user_id, word_en, word_ru):
                 f"UPDATE progress SET grade = 0 WHERE user_id = {row_user[0]} AND word = {row_word[0]}")
     conn.commit()
     return res
+
+
+def get_statistic(conn, user_id):
+    curr = conn.cursor()
+    curr.execute('SELECT users.id, users.first_name, users.grade, ' +
+                 'themes.theme, AVG(progress.grade) AS avg_progress_grade ' +
+                 'FROM users ' +
+                 f'INNER JOIN progress ON progress.user_id = {user_id} ' +
+                 'INNER JOIN words ON words.id = progress.word ' +
+                 'INNER JOIN themes ON themes.id = words.theme ' +
+                 f'WHERE users.id = {user_id} '
+                 f'GROUP BY users.id, users.first_name, users.grade, themes.theme ')
+    for row in curr:
+        #print(row)
+        bot.send_message(user_id, f'Пользователь: {row[1]}', reply_markup=BotKeyboard.start_keyboard())
+        print(f'Пользователь: {row[1]}')
+        bot.send_message(user_id, f'Тема: {row[3]}  — {"{0:.2f}".format(row[4]/row[2] * 100) } %', reply_markup=BotKeyboard.start_keyboard())
+        print(f'Тема: {row[3]}  — {"{0:.2f}".format(row[4]/row[2] * 100) } %')
