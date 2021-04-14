@@ -44,18 +44,32 @@ class bot_translator:
                 get_statistic(conn, user_id)
                 pass
             elif 'Настройка параметров' == text:
+                bot.send_message(user_id, f"Настройка параметров",
+                                 reply_markup=BotKeyboard.setting_keyboard())
                 pass
             elif 'Увеличить сложность' == text:
+                bot.send_message(user_id, f"Увеличить сложность",
+                                 reply_markup=BotKeyboard.start_keyboard())
                 pass
             elif 'Уменьшить сложность' == text:
+                bot.send_message(user_id, f"Уменьшить сложность",
+                                 reply_markup=BotKeyboard.start_keyboard())
                 pass
             elif 'Увеличить повторения' == text:
+                bot.send_message(user_id, f"Увеличить повторения",
+                                 reply_markup=BotKeyboard.start_keyboard())
                 pass
             elif 'Уменьшить повторения' == text:
+                bot.send_message(user_id, f"Уменьшить повторения",
+                                 reply_markup=BotKeyboard.start_keyboard())
                 pass
             elif 'Сменить тему' == text:
+                bot.send_message(user_id, f"Сменить тему",
+                                 reply_markup=BotKeyboard.start_keyboard())
                 pass
             elif 'Тема: ' in text:
+                bot.send_message(user_id, text,
+                                 reply_markup=BotKeyboard.start_keyboard())
                 pass
         if row[0] == 1:
             if 'Ответ: ' in text:
