@@ -50,18 +50,17 @@ class bot_translator:
             answer_processing(conn, user_id, text)
             print(f"oTVET {bot} {text} {user_id}")
             bot.send_message(user_id, f"Я получил ответ", reply_markup=BotKeyboard.start_keyboard())
-            pass
-
-        # Echo test without logic
-        print(f"{bot} {text} {user_id}")
-        #bot.send_message(user_id, f"Эхо: {text}", reply_markup=BotKeyboard.start_keyboard())
-        text = generate_test_question(conn, user_id)
-        #bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
+        else:
+            # Echo test without logic
+            print(f"{bot} {text} {user_id}")
+            bot.send_message(user_id, f"Эхо: {text}", reply_markup=BotKeyboard.start_keyboard())
+            text = generate_test_question(conn, user_id)
+            bot.send_message(user_id, f"Тестовый вопрос: {text}", reply_markup=BotKeyboard.start_keyboard())
 
 
 def answer_processing(conn, user_id, text):
     cur = conn.cursor()
-    cur.execute(f'SELECT num_questions FROM users WHERE id = {user_id}')
+    cur.execute(f'SELECT num_questions, max_question FROM users WHERE id = {user_id}')
     row = cur.fetchone()
 
     if f'{row[0]}. Ответ: ' not in text:
@@ -73,6 +72,18 @@ def answer_processing(conn, user_id, text):
     print(words)
     res = check_answer(conn, user_id, words[0], words[1])
     bot.send_message(user_id, res, reply_markup=BotKeyboard.start_keyboard())
+
+    if row[0] == row[1]:
+        bot.send_message(user_id, res, reply_markup=BotKeyboard.start_keyboard())
+    else:
+        num_add(conn, user_id, 1)
+        bot.send_message(user_id, res)
+        generate_question(conn, user_id)
+
+def num_add(conn, user_id, delta):
+    cur = conn.cursor()
+    cur.execute(f"UPDATE users SET num_questions = num_questions + {delta} WHERE id = {user_id} ")
+    conn.commit()
 
 
 def generate_question(conn, user_id):
