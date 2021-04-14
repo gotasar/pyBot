@@ -129,10 +129,10 @@ def complexity_add(conn, user_id, delta):
     if row is None:
         return
     complexity = row[0] + delta
-    if complexity > 5:
-        complexity = 5
-    if complexity < 3:
+    if complexity > 3:
         complexity = 3
+    if complexity < 2:
+        complexity = 2
 
     cur.execute(f"UPDATE users SET complexity = {complexity} WHERE id = {user_id}")
     conn.commit()
