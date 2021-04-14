@@ -34,13 +34,13 @@ class bot_translator:
         cur.execute(f"SELECT state FROM users WHERE id = {user_id}")
         row = cur.fetchone()
         if row is None:
-            add_user(conn, user_id)
+            add_user(user_id, user_name)
             return
         if row[0] == 0:
             if '/start' == text:
                 pass
             elif 'Начать тест' == text:
-                start_test(user_id, user_name)
+                start_test(conn, user_id)
                 pass
             elif 'Статистика' == text:
                 get_statistic(conn, user_id)
