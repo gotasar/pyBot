@@ -40,7 +40,7 @@ class bot_translator:
             if '/start' == text:
                 pass
             elif 'Начать тест' == text:
-                start_test(conn, user_id)
+                start_test(user_id, user_name)
                 pass
             elif 'Статистика' == text:
                 get_statistic(conn, user_id)
